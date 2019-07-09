@@ -1,5 +1,6 @@
 import pyautogui
 import win32gui
+from math import floor
 
 # Disables fail safe
 pyautogui.FAILSAFE = False
@@ -8,23 +9,45 @@ pyautogui.FAILSAFE = False
 # Game class
 class Game:
 
+    # Stores alphabet to iterate over, in a certain order
+    alphabet = [
+        'i',
+        't',
+        'l',
+        'a',
+        'r',
+        'b',
+        'c',
+        'd',
+        'f',
+        'e',
+        'g',
+        'h',
+        'j',
+        'k',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        's',
+        'y',
+        'u',
+        'v',
+        'w',
+        'x',
+        'z',
+    ]
+
     # Constructor
     def __init__(self):
-
         # Set handle to null (None) for now
         self.hwnd = None
 
         # Tries to find the game
         def callback(hwnd, extra):
-            # Gets position of this window
-            rect = win32gui.GetWindowRect(hwnd)
-            x = rect[0]
-            y = rect[1]
-            w = rect[2] - x
-            h = rect[3] - y
-
-            # If this window is bookworm adventures AND if rv is not all 0
-            if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and not (x == 0 and y == 0 and w == 0 and h == 0):
+            # If this window is bookworm adventures AND if we haven't already found it
+            if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and self.hwnd is None:
                 # Store handle
                 self.hwnd = hwnd
 
@@ -54,7 +77,41 @@ class Game:
     # Returns a grid of letters given a screenshot of the grid
     def get_letters(self, screenshot):
 
-        return []
+        # Stores a grid of spotted letters
+        letter_grid = [
+            [None, None, None, None],
+            [None, None, None, None],
+            [None, None, None, None],
+            [None, None, None, None]
+        ]
+
+        # Gets tile width and height
+        tile_width, tile_height = floor(screenshot.width / 4), floor(screenshot.height / 4)
+
+        # Iterates through alphabet
+        for char in self.alphabet:
+            # Locates this character in this position
+            for (x, y, w, h) in pyautogui.locateAll("resources/" + char + ".png", screenshot,
+                                                    grayscale=True,
+                                                    confidence=0.85):
+
+                # Gets i and j
+                i, j = x // tile_width, y // tile_height
+
+                # Stores this letter at a certain position
+                letter_grid[i][j] = char
+                print((x, y, w, h, char))
+
+            '''
+            print((int(i * tile_width),
+                   int(j * tile_height),
+                   int(tile_width / 4),
+                   int(tile_height / 4)))
+            print(char)
+            print("--------------")
+            '''
+
+        return letter_grid
 
 
 '''
