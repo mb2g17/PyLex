@@ -102,15 +102,6 @@ class Game:
                 letter_grid[i][j] = char
                 print((x, y, w, h, char))
 
-            '''
-            print((int(i * tile_width),
-                   int(j * tile_height),
-                   int(tile_width / 4),
-                   int(tile_height / 4)))
-            print(char)
-            print("--------------")
-            '''
-
         return letter_grid
 
 
