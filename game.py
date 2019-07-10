@@ -1,4 +1,5 @@
 import pyautogui
+import pyscreeze
 import win32gui
 from math import floor
 
@@ -8,7 +9,6 @@ pyautogui.FAILSAFE = False
 
 # Game class
 class Game:
-
     # Stores alphabet to iterate over, in a certain order
     alphabet = [
         'i',
@@ -39,6 +39,9 @@ class Game:
         'z',
     ]
 
+    # Stores typing speed
+    type_speed = 0.05
+
     # Constructor
     def __init__(self):
         # Set handle to null (None) for now
@@ -65,6 +68,10 @@ class Game:
         h = rect[3] - y
 
         return x, y, w, h
+
+    # Screenshots the whole game
+    def screenshot(self):
+        return pyautogui.screenshot(region=self.get_bookworm_pos())
 
     # Returns a screenshot of the grid
     def screenshot_grid(self):
@@ -94,15 +101,45 @@ class Game:
             for (x, y, w, h) in pyautogui.locateAll("resources/" + char + ".png", screenshot,
                                                     grayscale=True,
                                                     confidence=0.85):
-
                 # Gets i and j
                 i, j = x // tile_width, y // tile_height
 
                 # Stores this letter at a certain position
                 letter_grid[i][j] = char
-                print((x, y, w, h, char))
 
         return letter_grid
+
+    # Focuses the game by clicking on it
+    def focus(self):
+        # Gets app position
+        (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
+        pyautogui.click(appX + appWidth // 2,
+                        appY + appHeight // 2,
+                        duration=self.type_speed)
+
+    # Types out a word on the grid given a list of positions (0,1), (2,3) etc.
+    def type(self, positions):
+        # Gets app position
+        (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
+
+        # For each position
+        for (x, y) in positions:
+            # Click there
+            pyautogui.click(appX + 304 + 25 + x * 50,
+                            appY + 335 + 25 + y * 50,
+                            duration=self.type_speed)
+
+    # Just presses enter, usually to apply a word
+    def press_enter(self):
+        pyautogui.press('enter')
+
+    # Right clicks, usually to cancel a word
+    def right_click(self):
+        pyautogui.click(button='right')
+
+    # Returns true if the attack button is enabled
+    def is_attack_enabled(self):
+        return pyautogui.locate("resources/attackEnabled.png", self.screenshot()) is not None
 
 
 '''

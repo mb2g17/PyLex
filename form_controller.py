@@ -1,4 +1,5 @@
 from PyQt5 import QtGui
+from time import sleep
 
 import form_view
 import game
@@ -30,23 +31,13 @@ class UiController:
 
         # Stores a list of english words, in tiles
         self.words = []
-
-        f = open("resources/words_alpha.txt", "r")
+        f = open("resources/words.txt", "r")
         for line in f:
             self.words += [misc.string_to_tiles(line.rstrip())]
         f.close()
 
-        '''
-        self.words += [misc.string_to_tiles("wiredraw")]
-        self.words += [misc.string_to_tiles("arrayed")]
-        self.words += [misc.string_to_tiles("array")]
-        self.words += [misc.string_to_tiles("take")]
-        '''
-        print(self.words)
-
     # When the input word button is pressed
     def inputword_clicked(self):
-
         # Screenshots grid
         screenshot = self.game.screenshot_grid()
         screenshot.save("screenshot.png")
@@ -54,13 +45,15 @@ class UiController:
 
         # Reads letters from grid
         grid = self.game.get_letters(screenshot)
+        print(grid)
 
         # Puts all the letters into a full string
         full_str = ""
 
         for i in range(len(grid)):
             for j in range(len(grid[i])):
-                full_str += "qu" if grid[i][j] == "q" else grid[i][j]
+                if grid[i][j] is not None:
+                    full_str += "qu" if grid[i][j] == "q" else grid[i][j]
 
         # Puts all the letters into a list of tiles
         tiles = misc.string_to_tiles(full_str)
@@ -82,6 +75,25 @@ class UiController:
         # Reverses list of words, so biggest are at the front
         possible_words = possible_words[::-1]
 
-        print(possible_words)
+        # -- DEBUG --
+        top_words = possible_words[:10]
+        for word in top_words:
 
+            print("Typing out '" + word + "'...")
+
+            positions = misc.string_to_pos(grid, word)
+
+            self.game.focus()
+            self.game.type(positions)
+
+            sleep(1)
+
+            if self.game.is_attack_enabled():
+                self.game.press_enter()
+                break
+            else:
+                self.game.right_click()
+                sleep(0.25)
+
+        print("Done!")
         # -----------

@@ -1,3 +1,5 @@
+import copy
+
 # Converts a string to a list of tiles
 def string_to_tiles(str):
     # Base case
@@ -47,3 +49,27 @@ def can_type(tiles_grid, tiles_word):
 
     # Base case; we can't type this word
     return False
+
+
+# Converts a string to a list of tile positions, given a grid
+def string_to_pos(grid, str):
+    # Base case
+    if len(str) == 0:
+        return []
+
+    # Gets the letter we are looking for
+    needle_letter = str[0]
+
+    # Looks through the grid
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+
+            # If this letter is here
+            if needle_letter == grid[i][j]:
+                # Recursive case
+                new_grid = copy.deepcopy(grid)
+                new_grid[i][j] = None
+                return [(i, j)] + string_to_pos(new_grid, str[1:])
+
+    # There is a problem
+    raise Exception("Cannot type string " + str + " because needle character " + needle_letter + " is not in the grid " + str(grid))
