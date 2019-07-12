@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>569</height>
+    <height>616</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,11 +76,87 @@
       <x>10</x>
       <y>30</y>
       <width>261</width>
-      <height>23</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Input Word</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="screenshotGrid">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>261</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Screenshot grid</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="gridBox">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>140</y>
+      <width>121</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Cooper Std Black</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>
+
+</string>
+    </property>
+    <property name="centerOnScroll">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>ABCD</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="readGrid">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>261</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Read grid</string>
     </property>
    </widget>
   </widget>
@@ -118,10 +194,158 @@
     </item>
    </layout>
   </widget>
+  <widget class="QGroupBox" name="optionsBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>541</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Options</string>
+   </property>
+   <widget class="QGroupBox" name="ocrMethodBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>120</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>OCR Method</string>
+    </property>
+    <widget class="QRadioButton" name="radioPyautogui">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>101</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PyAutoGUI</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioTesseract">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>111</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Google Tesseract</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>391</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tesseractTab">
+     <attribute name="title">
+      <string>Google Tesseract</string>
+     </attribute>
+     <widget class="QSlider" name="tesseractThresholdSlider">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>151</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>255</number>
+      </property>
+      <property name="value">
+       <number>30</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tesseractThresholdLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Google Tesseract threshold:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="tesseractThresholdNumber">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>47</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>30</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pyautoguiTab">
+     <attribute name="title">
+      <string>PyAutoGUI</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <zorder>isGameLocated</zorder>
+  <zorder>commandsBox</zorder>
+  <zorder>horizontalLayoutWidget</zorder>
+  <zorder>display</zorder>
+  <zorder>optionsBox</zorder>
  </widget>
  <tabstops>
   <tabstop>inputWord</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tesseractThresholdSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>tesseractThresholdNumber</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>534</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>323</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

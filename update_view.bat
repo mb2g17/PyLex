@@ -1,0 +1,1 @@
+pyuic5 form.ui -o form_view.py

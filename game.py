@@ -1,5 +1,8 @@
+from time import sleep
+
 import pyautogui
 import pyscreeze
+import pytesseract
 import win32gui
 from math import floor
 
@@ -71,6 +74,11 @@ class Game:
 
     # Screenshots the whole game
     def screenshot(self):
+        # Focuses and sleep
+        self.focus()
+        sleep(0.1)
+
+        # Screenshot
         return pyautogui.screenshot(region=self.get_bookworm_pos())
 
     # Returns a screenshot of the grid
@@ -78,11 +86,79 @@ class Game:
         # Gets app position
         (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
 
+        # Focuses and sleep
+        self.focus()
+        sleep(0.1)
+
         # Screenshot and return
         return pyautogui.screenshot(region=(appX + 304, appY + 335, 200, 203))
 
-    # Returns a grid of letters given a screenshot of the grid
-    def get_letters(self, screenshot):
+    # Returns a filtered screenshot of the grid, in pure black
+    def screenshot_grid_filtered(self, threshold):
+        # Gets screenshot of grid
+        screenshot = self.screenshot_grid()
+
+        # Filter only black
+        for i in range(screenshot.width):
+            for j in range(screenshot.height):
+                (r, g, b) = screenshot.getpixel((i, j))
+                if r > threshold or g > threshold or b > threshold:
+                    screenshot.putpixel((i, j), (255, 255, 255))
+
+        # Returns new image
+        return screenshot
+
+    # Returns a grid of letters given a screenshot of the grid (using tesseract)
+    def get_letters_tesseract(self, screenshot):
+        # Stores a grid of spotted letters
+        letter_grid = [
+            [None, None, None, None],
+            [None, None, None, None],
+            [None, None, None, None],
+            [None, None, None, None]
+        ]
+
+        # Gets text
+        text = pytesseract.image_to_string(screenshot, lang="Cooper")
+
+        # Remembers indexes and previous char
+        i = 0
+        j = 0
+        prev_i = 0
+        prev_j = 0
+        prev_char = ''
+
+        # Goes through each character
+        for char in text:
+            # If it's an actual letter
+            if char.isalpha():
+
+                # Convert to lower
+                char = char.lower()
+
+                # If this is u and prev char was q, do nothing
+                if not (char == 'u' and prev_char == 'q'):
+
+                    # Store in grid, if indexes are not too big
+                    if j < 4:
+                        letter_grid[i][j] = char
+
+                    # Stores previous char and indexes
+                    prev_char = char
+                    prev_i = i
+                    prev_j = j
+
+                    # Increase index
+                    i += 1
+                    if i == 4:
+                        i = 0
+                        j += 1
+
+        # Return grid
+        return letter_grid
+
+    # Returns a grid of letters given a screenshot of the grid (using pyautogui)
+    def get_letters_pyautogui(self, screenshot):
 
         # Stores a grid of spotted letters
         letter_grid = [
