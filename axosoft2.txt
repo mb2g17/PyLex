@@ -1,2 +1,4 @@
 
 - make pylex play mini-games
+- when you press "screenshot grid", it'll erase grid box and possible word box
+- when you press "read grid", it'll erase possible word box

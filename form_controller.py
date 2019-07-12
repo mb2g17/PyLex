@@ -198,17 +198,17 @@ class UiController:
         # Displays grid
         self.display_grid(grid)
 
+        # Gets a list of possible words
+        possible_words = self.get_possible_words(grid)
+
+        # Gets top words and puts them in box
+        top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
+        self.form.possibleWordsBox.setPlainText("")
+        for word in top_words:
+            self.form.possibleWordsBox.insertPlainText(word + "\n")
+
         # Thread function
         def thread_fun():
-
-            # Gets a list of possible words
-            possible_words = self.get_possible_words(grid)
-
-            # Gets top words and puts them in box
-            top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
-            self.form.possibleWordsBox.setPlainText("")
-            for word in top_words:
-                self.form.possibleWordsBox.insertPlainText(word + "\n")
 
             # Writes out top words
             for word in top_words:
