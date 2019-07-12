@@ -129,19 +129,27 @@ class UiController:
             # Reverses list of words, so biggest are at the front
             possible_words = possible_words[::-1]
 
-            # -- DEBUG --
-            top_words = possible_words[:10]
+            # Gets top words and puts them in box
+            top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
+            for word in top_words:
+                self.form.possibleWordsBox.insertPlainText(word + "\n")
+
+            # Writes out top words
             for word in top_words:
 
                 print("Typing out '" + word + "'...")
 
+                # Converts words to positions on the grid
                 positions = misc.string_to_pos(grid, word)
 
+                # Focus on the game, and type the word out
                 self.game.focus()
                 self.game.type(positions)
 
+                # Wait for the animations to play
                 sleep(1)
 
+                # If the attack button is enabled, submit. If not, erase and start again
                 if self.game.is_attack_enabled():
                     self.game.press_enter()
                     break
@@ -150,7 +158,6 @@ class UiController:
                     sleep(0.25)
 
             print("Done!")
-            # -----------
 
         # Starts a thread that does this
         thread = Thread(target=thread_fun)

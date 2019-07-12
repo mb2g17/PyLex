@@ -108,9 +108,9 @@
    <widget class="QPlainTextEdit" name="gridBox">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>10</x>
       <y>140</y>
-      <width>121</width>
+      <width>101</width>
       <height>111</height>
      </rect>
     </property>
@@ -172,6 +172,36 @@
     </property>
     <property name="text">
      <string>Read grid</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="possibleWordsBox">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>140</y>
+      <width>151</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Cooper Std Black</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A display for the list of possible words.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>misunderstanding</string>
     </property>
    </widget>
   </widget>
