@@ -237,35 +237,38 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
+       <y>20</y>
        <width>101</width>
        <height>17</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A naive reading approach using PyAutoGUI using sample images. A little less reliable than Tesseract, but if it incorrectly reads a letter, it'll only affect that letter and not the whole grid.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A reading approach using PyAutoGUI using sample images. More reliable than Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>PyAutoGUI</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioTesseract">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>40</y>
        <width>111</width>
        <height>17</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's a little more reliable than PyAutoGUI, but it'll either read the grid perfectly or go horribly wrong.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's less reliable than PyAutoGUI, and a little experimental.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>Google Tesseract</string>
      </property>
      <property name="checked">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
@@ -282,7 +285,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="generalTab">
      <property name="toolTip">
@@ -323,20 +326,12 @@
        <number>5</number>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tesseractTab">
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding how operations are performed while using Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <attribute name="title">
-      <string>Google Tesseract</string>
-     </attribute>
      <widget class="QSlider" name="tesseractThresholdSlider">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>151</width>
+        <x>14</x>
+        <y>54</y>
+        <width>111</width>
         <height>22</height>
        </rect>
       </property>
@@ -353,26 +348,26 @@
      <widget class="QLabel" name="tesseractThresholdLabel">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>141</width>
-        <height>16</height>
+        <x>14</x>
+        <y>30</y>
+        <width>111</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract threshold&lt;/span&gt;&lt;/p&gt;&lt;p&gt;How strongly PyLex should filter out black in screenshots while using Tesseract, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Thresholding value&lt;/span&gt;&lt;/p&gt;&lt;p&gt;How strongly PyLex should filter out black in screenshots, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>Google Tesseract threshold:</string>
+       <string>Thresholding value:</string>
       </property>
      </widget>
      <widget class="QLabel" name="tesseractThresholdNumber">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>10</y>
-        <width>47</width>
-        <height>16</height>
+        <x>110</x>
+        <y>30</y>
+        <width>21</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
@@ -382,10 +377,18 @@
     </widget>
     <widget class="QWidget" name="pyautoguiTab">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding functionality when PyAutoGUI is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding how operations are performed while using Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <attribute name="title">
       <string>PyAutoGUI</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tesseractTab">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding functionality when PyAutoGUI is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <attribute name="title">
+      <string>Google Tesseract</string>
      </attribute>
     </widget>
    </widget>
