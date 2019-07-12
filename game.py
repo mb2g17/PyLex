@@ -4,7 +4,10 @@ import pyautogui
 import pyscreeze
 import pytesseract
 import win32gui
+from PIL import Image
 from math import floor
+
+import cv2 as cv
 
 # Disables fail safe
 pyautogui.FAILSAFE = False
@@ -97,16 +100,23 @@ class Game:
     def screenshot_grid_filtered(self, threshold):
         # Gets screenshot of grid
         screenshot = self.screenshot_grid()
+        screenshot.save("screenshot.png")
 
-        # Filter only black
+        # Filter only black (old method)
+        '''
         for i in range(screenshot.width):
             for j in range(screenshot.height):
                 (r, g, b) = screenshot.getpixel((i, j))
                 if r > threshold or g > threshold or b > threshold:
                     screenshot.putpixel((i, j), (255, 255, 255))
+        '''
+        # Filter only black (OpenCV method)
+        img = cv.imread("screenshot.png", 0)
+        ret, img = cv.threshold(img, threshold, 255, cv.THRESH_BINARY)
+        cv.imwrite("screenshot.png", img)
 
         # Returns new image
-        return screenshot
+        return Image.open("screenshot.png")
 
     # Returns a grid of letters given a screenshot of the grid (using tesseract)
     def get_letters_tesseract(self, screenshot):
@@ -119,7 +129,7 @@ class Game:
         ]
 
         # Gets text
-        text = pytesseract.image_to_string(screenshot, lang="Cooper")
+        text = pytesseract.image_to_string(screenshot, lang="Cooper", )
 
         # Remembers indexes and previous char
         i = 0

@@ -45,6 +45,9 @@
      <height>251</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A display for the screenshots.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -79,6 +82,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots and reads the grid, then proceeds to type out words to submit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
     <property name="text">
      <string>Input Word</string>
     </property>
@@ -91,6 +97,9 @@
       <width>261</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots the grid and puts the image on the left.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string>Screenshot grid</string>
@@ -112,6 +121,9 @@
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A display for the read grid.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
@@ -154,6 +166,9 @@
       <width>261</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots and reads the grid, then outputs it to the display box below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string>Read grid</string>
@@ -227,6 +242,9 @@
        <height>17</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A naive reading approach using PyAutoGUI using sample images. A little less reliable than Tesseract, but if it incorrectly reads a letter, it'll only affect that letter and not the whole grid.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <property name="text">
       <string>PyAutoGUI</string>
      </property>
@@ -239,6 +257,9 @@
        <width>111</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's a little more reliable than PyAutoGUI, but it'll either read the grid perfectly or go horribly wrong.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>Google Tesseract</string>
@@ -261,9 +282,52 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
+    <widget class="QWidget" name="generalTab">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;General options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options concerning the general usage of PyLex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <attribute name="title">
+      <string>General</string>
+     </attribute>
+     <widget class="QLabel" name="wordsToTryLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Words to try&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The number of words to try typing out into the grid before giving up. For example, if this was 5, PyLex will try typing out the best 5 words it can find. If none of them work, it will then give up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Words to try:</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="wordsToTrySpinBox">
+      <property name="geometry">
+       <rect>
+        <x>81</x>
+        <y>10</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="value">
+       <number>5</number>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tesseractTab">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding how operations are performed while using Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <attribute name="title">
       <string>Google Tesseract</string>
      </attribute>
@@ -295,6 +359,9 @@
         <height>16</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract threshold&lt;/span&gt;&lt;/p&gt;&lt;p&gt;How strongly PyLex should filter out black in screenshots while using Tesseract, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="text">
        <string>Google Tesseract threshold:</string>
       </property>
@@ -314,6 +381,9 @@
      </widget>
     </widget>
     <widget class="QWidget" name="pyautoguiTab">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI options&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Options surrounding functionality when PyAutoGUI is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
      <attribute name="title">
       <string>PyAutoGUI</string>
      </attribute>

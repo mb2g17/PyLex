@@ -29,7 +29,7 @@ class UiController:
             print("NOT LOCATED")
 
         # Adds events
-        self.form.inputWord.clicked.connect(self.inputword_clicked)  # TODO: Change this back
+        self.form.inputWord.clicked.connect(self.inputword_clicked)
         self.form.screenshotGrid.clicked.connect(self.screenshot_grid)
         self.form.readGrid.clicked.connect(self.readgrid_clicked)
 
@@ -41,17 +41,12 @@ class UiController:
         f.close()
 
     def test(self):
-        # Screenshots grid
-        screenshot = self.game.screenshot_grid_filtered(int(self.form.tesseractThresholdSlider.value()))
-        print("-----------")
-        print(self.game.get_letters_tesseract(screenshot))
+        print("Test")
 
     # Screenshots the grid using either tesseract or pyautogui, then returns the screenshot
     def screenshot_grid(self):
         # Screenshots grid
-        screenshot = self.game.screenshot_grid_filtered(int(self.form.tesseractThresholdSlider.value())) \
-            if self.form.radioTesseract.isChecked() \
-            else self.game.screenshot_grid()
+        screenshot = self.game.screenshot_grid_filtered(int(self.form.tesseractThresholdSlider.value()))
         screenshot.save("screenshot.png")
         self.form.display.setPixmap(QtGui.QPixmap("screenshot.png"))
 
@@ -63,17 +58,10 @@ class UiController:
         return self.game.get_letters_tesseract(screenshot) if self.form.radioTesseract.isChecked() \
             else self.game.get_letters_pyautogui(screenshot)
 
-    # ----------------
-    # --* EVENTS
-    # ----------------
-
-    # When the read grid button is pressed
-    def readgrid_clicked(self):
+    # Displays a grid to the screen
+    def display_grid(self, grid):
         # Clears box
         self.form.gridBox.setPlainText("")
-
-        # Screenshots grid and reads letters from grid
-        grid = self.read_grid(self.screenshot_grid())
 
         # Transposes grid for displaying
         grid = numpy.array(grid).transpose().tolist()
@@ -86,11 +74,27 @@ class UiController:
                 )
             self.form.gridBox.insertPlainText("\n")
 
+    # ----------------
+    # --* EVENTS
+    # ----------------
+
+    # When the read grid button is pressed
+    def readgrid_clicked(self):
+        # Screenshots grid and reads letters from grid
+        grid = self.read_grid(self.screenshot_grid())
+
+        # Displays grid
+        self.display_grid(grid)
+
     # When the input word button is pressed
     def inputword_clicked(self):
         # Screenshots grid and reads letters from grid
-        grid = self.read_grid(self.screenshot_grid())
+        screenshot = self.screenshot_grid()
+        grid = self.read_grid(screenshot)
         print(grid)
+
+        # Displays grid
+        self.display_grid(grid)
 
         # Puts all the letters into a full string
         full_str = ""
