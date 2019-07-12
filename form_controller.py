@@ -205,6 +205,7 @@ class UiController:
 
             # Gets top words and puts them in box
             top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
+            self.form.possibleWordsBox.setPlainText("")
             for word in top_words:
                 self.form.possibleWordsBox.insertPlainText(word + "\n")
 
