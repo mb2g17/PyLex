@@ -34,6 +34,7 @@ class UiController:
         self.form.inputWord.clicked.connect(self.inputword_clicked)
         self.form.screenshotGrid.clicked.connect(self.screenshot_grid)
         self.form.readGrid.clicked.connect(self.readgrid_clicked)
+        self.form.getPossibleWords.clicked.connect(self.getpossiblewords_clicked)
 
         # Stores a list of english words, in tiles
         self.words = []
@@ -76,6 +77,39 @@ class UiController:
                 )
             self.form.gridBox.insertPlainText("\n")
 
+    # Gets possible words given a grid
+    def get_possible_words(self, grid):
+        # Puts all the letters into a full string
+        full_str = ""
+
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] is not None:
+                    full_str += "qu" if grid[i][j] == "q" else grid[i][j]
+
+        # Puts all the letters into a list of tiles
+        tiles = misc.string_to_tiles(full_str)
+
+        # Get a list of possible words
+        possible_words = []
+        for word in self.words:
+
+            # If we can type this
+            if misc.can_type(tiles, word):
+                possible_words += [word]
+
+        # Sort words by length
+        possible_words.sort(key=len)
+
+        # Map each tile list to string
+        possible_words = list(map(lambda tile_list: misc.tiles_to_string(tile_list), possible_words))
+
+        # Reverses list of words, so biggest are at the front
+        possible_words = possible_words[::-1]
+
+        # Return list of possible words
+        return possible_words
+
     # ----------------
     # --* EVENTS
     # ----------------
@@ -87,6 +121,23 @@ class UiController:
 
         # Displays grid
         self.display_grid(grid)
+
+    # When the get possible words button is pressed
+    def getpossiblewords_clicked(self):
+        # Gets a list of possible words
+        grid = self.read_grid(self.screenshot_grid())
+        possible_words = self.get_possible_words(grid)
+
+        # Displays grid
+        self.display_grid(grid)
+
+        # Gets top words
+        top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
+
+        # Puts them in box
+        self.form.possibleWordsBox.setPlainText("")
+        for word in top_words:
+            self.form.possibleWordsBox.insertPlainText(word + "\n")
 
     # When the input word button is pressed
     def inputword_clicked(self):
@@ -101,33 +152,8 @@ class UiController:
         # Thread function
         def thread_fun():
 
-            # Puts all the letters into a full string
-            full_str = ""
-
-            for i in range(len(grid)):
-                for j in range(len(grid[i])):
-                    if grid[i][j] is not None:
-                        full_str += "qu" if grid[i][j] == "q" else grid[i][j]
-
-            # Puts all the letters into a list of tiles
-            tiles = misc.string_to_tiles(full_str)
-
-            # Get a list of possible words
-            possible_words = []
-            for word in self.words:
-
-                # If we can type this
-                if misc.can_type(tiles, word):
-                    possible_words += [word]
-
-            # Sort words by length
-            possible_words.sort(key=len)
-
-            # Map each tile list to string
-            possible_words = list(map(lambda tile_list: misc.tiles_to_string(tile_list), possible_words))
-
-            # Reverses list of words, so biggest are at the front
-            possible_words = possible_words[::-1]
+            # Gets a list of possible words
+            possible_words = self.get_possible_words(grid)
 
             # Gets top words and puts them in box
             top_words = possible_words[:self.form.wordsToTrySpinBox.value()]

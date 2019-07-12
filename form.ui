@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>616</height>
+    <height>619</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -67,7 +67,7 @@
      <x>270</x>
      <y>190</y>
      <width>281</width>
-     <height>261</height>
+     <height>281</height>
     </rect>
    </property>
    <property name="title">
@@ -93,7 +93,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>130</y>
       <width>261</width>
       <height>23</height>
      </rect>
@@ -109,7 +109,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>160</y>
       <width>101</width>
       <height>111</height>
      </rect>
@@ -162,7 +162,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>70</y>
+      <y>100</y>
       <width>261</width>
       <height>23</height>
      </rect>
@@ -178,7 +178,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>140</y>
+      <y>160</y>
       <width>151</width>
       <height>111</height>
      </rect>
@@ -202,6 +202,22 @@
     </property>
     <property name="placeholderText">
      <string>misunderstanding</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="getPossibleWords">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>261</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots and reads the grid, then outputs it to the display box below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Get possible words</string>
     </property>
    </widget>
   </widget>
@@ -243,7 +259,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>460</y>
+     <y>470</y>
      <width>541</width>
      <height>141</height>
     </rect>
@@ -346,7 +362,7 @@
         <x>81</x>
         <y>10</y>
         <width>51</width>
-        <height>16</height>
+        <height>21</height>
        </rect>
       </property>
       <property name="toolTip">
