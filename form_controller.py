@@ -12,6 +12,35 @@ from threading import Thread
 
 # Controller class
 class UiController:
+    # Tile scores
+    tile_score = {
+        "a": 1,
+        "b": 1.25,
+        "c": 1.25,
+        "d": 1,
+        "e": 1,
+        "f": 1.25,
+        "g": 1,
+        "h": 1.25,
+        "i": 1,
+        "j": 1.75,
+        "k": 1.75,
+        "l": 1,
+        "m": 1.25,
+        "n": 1,
+        "o": 1,
+        "p": 1.25,
+        "q": 1.75,
+        "r": 1,
+        "s": 1,
+        "t": 1,
+        "u": 1,
+        "v": 1.5,
+        "w": 1.5,
+        "x": 2,
+        "y": 1.5,
+        "z": 2,
+    }
 
     # Constructor; adds view to window
     def __init__(self, window):
@@ -98,17 +127,36 @@ class UiController:
             if misc.can_type(tiles, word):
                 possible_words += [word]
 
-        # Sort words by length
-        possible_words.sort(key=len)
-
         # Map each tile list to string
         possible_words = list(map(lambda tile_list: misc.tiles_to_string(tile_list), possible_words))
 
-        # Reverses list of words, so biggest are at the front
-        possible_words = possible_words[::-1]
+        # Sorts words
+        possible_words = self.sort_word_list(possible_words)
 
         # Return list of possible words
         return possible_words
+
+    # Gets a word's score
+    def get_word_score(self, word):
+        return sum(
+            list(
+                map(lambda c: self.tile_score[c], word)
+            )
+        )
+
+    # Sorts a word list
+    def sort_word_list(self, word_list):
+
+        # If we're doing it by score
+        if self.form.radioSortByScore.isChecked():
+            # Sorts by score
+            word_list.sort(key=lambda word: self.get_word_score(word), reverse=True)
+        else:
+            # Sorts by length
+            word_list.sort(key=len, reverse=True)
+
+        # Return new list
+        return word_list
 
     # ----------------
     # --* EVENTS
