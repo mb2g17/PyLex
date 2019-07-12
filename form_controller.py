@@ -7,6 +7,8 @@ import game
 import misc
 import numpy
 
+from threading import Thread
+
 
 # Controller class
 class UiController:
@@ -96,53 +98,60 @@ class UiController:
         # Displays grid
         self.display_grid(grid)
 
-        # Puts all the letters into a full string
-        full_str = ""
+        # Thread function
+        def thread_fun():
 
-        for i in range(len(grid)):
-            for j in range(len(grid[i])):
-                if grid[i][j] is not None:
-                    full_str += "qu" if grid[i][j] == "q" else grid[i][j]
+            # Puts all the letters into a full string
+            full_str = ""
 
-        # Puts all the letters into a list of tiles
-        tiles = misc.string_to_tiles(full_str)
+            for i in range(len(grid)):
+                for j in range(len(grid[i])):
+                    if grid[i][j] is not None:
+                        full_str += "qu" if grid[i][j] == "q" else grid[i][j]
 
-        # Get a list of possible words
-        possible_words = []
-        for word in self.words:
+            # Puts all the letters into a list of tiles
+            tiles = misc.string_to_tiles(full_str)
 
-            # If we can type this
-            if misc.can_type(tiles, word):
-                possible_words += [word]
+            # Get a list of possible words
+            possible_words = []
+            for word in self.words:
 
-        # Sort words by length
-        possible_words.sort(key=len)
+                # If we can type this
+                if misc.can_type(tiles, word):
+                    possible_words += [word]
 
-        # Map each tile list to string
-        possible_words = list(map(lambda tile_list: misc.tiles_to_string(tile_list), possible_words))
+            # Sort words by length
+            possible_words.sort(key=len)
 
-        # Reverses list of words, so biggest are at the front
-        possible_words = possible_words[::-1]
+            # Map each tile list to string
+            possible_words = list(map(lambda tile_list: misc.tiles_to_string(tile_list), possible_words))
 
-        # -- DEBUG --
-        top_words = possible_words[:10]
-        for word in top_words:
+            # Reverses list of words, so biggest are at the front
+            possible_words = possible_words[::-1]
 
-            print("Typing out '" + word + "'...")
+            # -- DEBUG --
+            top_words = possible_words[:10]
+            for word in top_words:
 
-            positions = misc.string_to_pos(grid, word)
+                print("Typing out '" + word + "'...")
 
-            self.game.focus()
-            self.game.type(positions)
+                positions = misc.string_to_pos(grid, word)
 
-            sleep(1)
+                self.game.focus()
+                self.game.type(positions)
 
-            if self.game.is_attack_enabled():
-                self.game.press_enter()
-                break
-            else:
-                self.game.right_click()
-                sleep(0.25)
+                sleep(1)
 
-        print("Done!")
-        # -----------
+                if self.game.is_attack_enabled():
+                    self.game.press_enter()
+                    break
+                else:
+                    self.game.right_click()
+                    sleep(0.25)
+
+            print("Done!")
+            # -----------
+
+        # Starts a thread that does this
+        thread = Thread(target=thread_fun)
+        thread.start()
