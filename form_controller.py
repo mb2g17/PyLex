@@ -56,6 +56,7 @@ class UiController:
         if self.game.hwnd is not None:
             print("LOCATED")
             self.form.isGameLocated.setText("Bookworm Adventures is located!")
+            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
         else:
             print("NOT LOCATED")
 
