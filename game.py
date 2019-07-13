@@ -3,7 +3,10 @@ from time import sleep
 import pyautogui
 import pyscreeze
 import pytesseract
+import win32api
+import win32con
 import win32gui
+import win32process
 from PIL import Image
 from math import floor
 
@@ -58,14 +61,25 @@ class Game:
 
         # Tries to find the game
         def callback(hwnd, extra):
-            # If this window is bookworm adventures AND if we haven't already found it
-            if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and self.hwnd is None:
-                # Store handle
-                self.hwnd = hwnd
+            # If the window name seems right AND this window is visible AND we haven't already found it
+            if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and \
+                    win32gui.IsWindowVisible(hwnd) == 1 and \
+                    self.hwnd is None:
+                # Gets process name
+                pid = win32process.GetWindowThreadProcessId(hwnd)
+                handle = win32api.OpenProcess(win32con.PROCESS_QUERY_INFORMATION | win32con.PROCESS_VM_READ, False,
+                                              pid[1])
+                proc_name = win32process.GetModuleFileNameEx(handle, 0)
+                proc_name = proc_name.split("\\")[::-1][0]
 
-                # If it's volume 2, remember that
-                if "Vol. 2" in win32gui.GetWindowText(hwnd):
-                    self.version = 2
+                # If the process name seems legit
+                if "BookwormAdventures" in proc_name:
+                    # Store handle
+                    self.hwnd = hwnd
+
+                    # If it's volume 2, remember that
+                    if "Vol2" in proc_name:
+                        self.version = 2
 
         # Enumerate through windows
         win32gui.EnumWindows(callback, None)

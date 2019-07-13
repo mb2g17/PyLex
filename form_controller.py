@@ -60,10 +60,12 @@ class UiController:
             # If it's volume 1
             if self.game.version == 1:
                 self.form.isGameLocated.setText("Bookworm Adventures is located!")
+                self.form.logo.setPixmap(QtGui.QPixmap("resources/logo1.png"))
                 self.load_words(1)
             # If it's volume 2
             elif self.game.version == 2:
                 self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
+                self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
                 self.load_words(2)
             else:
                 self.load_words(1)

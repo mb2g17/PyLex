@@ -30,7 +30,7 @@ class Ui_Form(object):
         self.logo.setSizePolicy(sizePolicy)
         self.logo.setAutoFillBackground(False)
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("resources/logo.png"))
+        self.logo.setPixmap(QtGui.QPixmap("resources/logof.png"))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.logoLayout.addWidget(self.logo)
