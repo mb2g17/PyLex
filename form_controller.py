@@ -196,6 +196,12 @@ class UiController:
         # Return new list
         return word_list
 
+    # Shows an alert telling the user that the process is not found
+    def process_not_found_alert(self):
+        pyautogui.alert("Bookworm Adventures process has not been found by PyLex yet! Try opening the game and "
+                        "pressing the 'Search for game window' button.",
+                        "Game not found!")
+
     # ----------------
     # --* EVENTS
     # ----------------
@@ -245,6 +251,10 @@ class UiController:
 
     # When the screenshot grid button is pressed
     def screenshotgrid_clicked(self):
+        # If process hasn't been found
+        if not self.game.hwnd.value_is_set():
+            self.process_not_found_alert()
+            return
 
         # Screenshots grid
         self.screenshot_grid()
@@ -255,6 +265,11 @@ class UiController:
 
     # When the read grid button is pressed
     def readgrid_clicked(self):
+        # If process hasn't been found
+        if not self.game.hwnd.value_is_set():
+            self.process_not_found_alert()
+            return
+
         # Screenshots grid and reads letters from grid
         grid = self.read_grid(self.screenshot_grid())
 
@@ -266,6 +281,11 @@ class UiController:
 
     # When the get possible words button is pressed
     def getpossiblewords_clicked(self):
+        # If process hasn't been found
+        if not self.game.hwnd.value_is_set():
+            self.process_not_found_alert()
+            return
+
         # Gets a list of possible words
         grid = self.read_grid(self.screenshot_grid())
         possible_words = self.get_possible_words(grid)
@@ -283,6 +303,11 @@ class UiController:
 
     # When the input word button is pressed
     def inputword_clicked(self):
+        # If process hasn't been found
+        if not self.game.hwnd.value_is_set():
+            self.process_not_found_alert()
+            return
+
         # Screenshots grid and reads letters from grid
         screenshot = self.screenshot_grid()
         grid = self.read_grid(screenshot)

@@ -2,7 +2,3 @@
 - give the option to load different dictionaries (list of words), by default there are vol 1 and vol 2 dictionaries (corresponding to both games), have a label telling you what dictionary is loaded, and a load button to load a dictionary as a file
 
 - make pylex play mini-games
-
-- make it so that controls don't work if the game is not found
-
-bug: pylex thinks vol2 is vol1 on 'search'
