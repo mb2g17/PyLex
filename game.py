@@ -104,6 +104,9 @@ class Game:
                             if is_window_condition == 0:
                                 on_process_close()
                                 break
+                            # If GUI thread is gone, kill self
+                            elif not threading.main_thread().is_alive():
+                                break
                             else:
                                 sleep(1)
                     thread = Thread(target=thread_process)
