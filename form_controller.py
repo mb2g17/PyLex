@@ -73,7 +73,7 @@ class UiController:
 
         # Adds events
         self.form.inputWord.clicked.connect(self.inputword_clicked)
-        self.form.screenshotGrid.clicked.connect(self.screenshot_grid)
+        self.form.screenshotGrid.clicked.connect(self.screenshotgrid_clicked)
         self.form.readGrid.clicked.connect(self.readgrid_clicked)
         self.form.getPossibleWords.clicked.connect(self.getpossiblewords_clicked)
 
@@ -176,6 +176,15 @@ class UiController:
     # --* EVENTS
     # ----------------
 
+    # When the screenshot grid button is pressed
+    def screenshotgrid_clicked(self):
+        # Screenshots grid
+        self.screenshot_grid()
+
+        # Erase grid box and possible word box
+        self.form.gridBox.setPlainText("")
+        self.form.possibleWordsBox.setPlainText("")
+
     # When the read grid button is pressed
     def readgrid_clicked(self):
         # Screenshots grid and reads letters from grid
@@ -184,13 +193,14 @@ class UiController:
         # Displays grid
         self.display_grid(grid)
 
+        # Erase possible word box
+        self.form.possibleWordsBox.setPlainText("")
+
     # When the get possible words button is pressed
     def getpossiblewords_clicked(self):
         # Gets a list of possible words
         grid = self.read_grid(self.screenshot_grid())
         possible_words = self.get_possible_words(grid)
-
-        print(grid)
 
         # Displays grid
         self.display_grid(grid)
