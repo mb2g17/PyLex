@@ -48,6 +48,9 @@ class Game:
     # Stores typing speed
     type_speed = 0.05
 
+    # Game version (1 for the first game, 2 for vol. 2)
+    version = 1
+
     # Constructor
     def __init__(self):
         # Set handle to null (None) for now
@@ -59,6 +62,10 @@ class Game:
             if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and self.hwnd is None:
                 # Store handle
                 self.hwnd = hwnd
+
+                # If it's volume 2, remember that
+                if "Vol. 2" in win32gui.GetWindowText(hwnd):
+                    self.version = 2
 
         # Enumerate through windows
         win32gui.EnumWindows(callback, None)

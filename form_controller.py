@@ -42,6 +42,9 @@ class UiController:
         "z": 2,
     }
 
+    # The possible words to type in
+    words = []
+
     # Constructor; adds view to window
     def __init__(self, window):
 
@@ -52,13 +55,21 @@ class UiController:
         # Creates the game handle
         self.game = game.Game()
 
-        # If it finds the game, say so
+        # If it finds the game
         if self.game.hwnd is not None:
-            print("LOCATED")
-            self.form.isGameLocated.setText("Bookworm Adventures is located!")
+            # If it's volume 1
+            if self.game.version == 1:
+                self.form.isGameLocated.setText("Bookworm Adventures is located!")
+                self.load_words(1)
+            # If it's volume 2
+            elif self.game.version == 2:
+                self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
+                self.load_words(2)
+            else:
+                self.load_words(1)
+
+            # Make the text green
             self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
-        else:
-            print("NOT LOCATED")
 
         # Adds events
         self.form.inputWord.clicked.connect(self.inputword_clicked)
@@ -66,15 +77,17 @@ class UiController:
         self.form.readGrid.clicked.connect(self.readgrid_clicked)
         self.form.getPossibleWords.clicked.connect(self.getpossiblewords_clicked)
 
+    def test(self):
+        print("Test")
+
+    # Loads words, vol=1 for the first game, vol=2 for the second
+    def load_words(self, vol):
         # Stores a list of english words, in tiles
         self.words = []
-        f = open("resources/words.txt", "r")
+        f = open("resources/words" + str(vol) + ".txt", "r")
         for line in f:
             self.words += [misc.string_to_tiles(line.rstrip())]
         f.close()
-
-    def test(self):
-        print("Test")
 
     # Screenshots the grid using either tesseract or pyautogui, then returns the screenshot
     def screenshot_grid(self):

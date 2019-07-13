@@ -6,3 +6,10 @@ __pycache__/
 venv/
 
 screenshot\.png
+
+main\.pak extract/
+
+Lib/
+
+Scripts/
+
