@@ -42,7 +42,7 @@ class Game:
         'v',
         'w',
         'x',
-        'z',
+        'z'
     ]
 
     # Stores typing speed
@@ -189,7 +189,7 @@ class Game:
         tile_width, tile_height = floor(screenshot.width / 4), floor(screenshot.height / 4)
 
         # Iterates through alphabet
-        for char in self.alphabet:
+        for char in self.alphabet + ["wildcard"]:
             # Locates this character in this position
             for (x, y, w, h) in pyautogui.locateAll("resources/" + char + ".png", screenshot,
                                                     grayscale=True,
@@ -198,7 +198,7 @@ class Game:
                 i, j = x // tile_width, y // tile_height
 
                 # Stores this letter at a certain position
-                letter_grid[i][j] = char
+                letter_grid[i][j] = char if char is not "wildcard" else "?"
 
         return letter_grid
 

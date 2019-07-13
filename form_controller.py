@@ -116,7 +116,7 @@ class UiController:
         for row in grid:
             for tile in row:
                 self.form.gridBox.insertPlainText(
-                    tile.upper() if tile is not None else "?"
+                    tile.upper() if tile is not None else "#"
                 )
             self.form.gridBox.insertPlainText("\n")
 
@@ -189,6 +189,8 @@ class UiController:
         # Gets a list of possible words
         grid = self.read_grid(self.screenshot_grid())
         possible_words = self.get_possible_words(grid)
+
+        print(grid)
 
         # Displays grid
         self.display_grid(grid)
