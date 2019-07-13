@@ -5,12 +5,17 @@ from PIL import ImageEnhance, Image
 from PyQt5 import QtGui
 from time import sleep
 
+from PyQt5.QtWidgets import QFileDialog
+
 import form_view
 import game
 import misc
 import numpy
 
 from threading import Thread
+
+
+from dictionary import Dictionary
 
 
 # Controller class
@@ -45,8 +50,8 @@ class UiController:
         "z": 2,
     }
 
-    # The possible words to type in
-    words = []
+    # The possible words to type in (dictionary)
+    dictionary: Dictionary = None
 
     # Constructor; adds view to window
     def __init__(self, window):
@@ -54,6 +59,9 @@ class UiController:
         # Creates the view
         self.form = form_view.Ui_Form()
         self.form.setupUi(window)
+
+        # Sets up dictionary
+        self.dictionary = Dictionary(self.form.dictionary)
 
         # Creates the game handle
         self.game = game.Game()
@@ -69,22 +77,23 @@ class UiController:
         self.form.searchForGameWindow.clicked.connect(self.searchforgamewindow_clicked)
         self.form.typingSpeedSpinBox.valueChanged.connect(self.typingspeed_valuechanged)
         self.form.submitImmediateBox.stateChanged.connect(self.submitimmediately_statechanged)
+        self.form.dictionary.clicked.connect(self.dictionary_clicked)
 
     def test(self):
         print("Test")
 
-    # Loads the default dictionaries
+    # Loads the default dictionaries for the volume we have
     def load_default_dictionaries(self):
         # If the game is actually there
         if self.game.hwnd.value_is_set():
             # If it's volume 1
             if self.game.version == 1:
-                self.load_words(1)
+                self.dictionary.load_vol(1)
             # If it's volume 2
             elif self.game.version == 2:
-                self.load_words(2)
+                self.dictionary.load_vol(2)
             else:
-                self.load_words(1)
+                self.dictionary.load_vol(1)
 
     # Updates the logo and label based on state:
     # 0 - process is not found
@@ -103,15 +112,6 @@ class UiController:
             self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
             self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
             self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
-
-    # Loads words, vol=1 for the first game, vol=2 for the second
-    def load_words(self, vol):
-        # Stores a list of english words, in tiles
-        self.words = []
-        f = open("resources/words" + str(vol) + ".txt", "r")
-        for line in f:
-            self.words += [misc.string_to_tiles(line.rstrip())]
-        f.close()
 
     # Screenshots the grid using either tesseract or pyautogui, then returns the screenshot
     def screenshot_grid(self):
@@ -159,7 +159,7 @@ class UiController:
 
         # Get a list of possible words
         possible_words = []
-        for word in self.words:
+        for word in self.dictionary.get_words():
 
             # If we can type this
             if misc.can_type(tiles, word):
@@ -205,6 +205,18 @@ class UiController:
     # ----------------
     # --* EVENTS
     # ----------------
+
+    # When the dictionary button is clicked
+    def dictionary_clicked(self):
+        # Uses file open dialog
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        filename, _ = QFileDialog.getOpenFileName(None, caption="Open a custom dictionary file",
+                                                  directory="resources/",
+                                                  filter="Text Files (*.txt)", options=options)
+        # Load dictionary
+        if filename:
+            self.dictionary.load(filename)
 
     # When the submit immediately box changes state
     def submitimmediately_statechanged(self):

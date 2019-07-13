@@ -105,6 +105,13 @@ background-color:rgb(255, 184, 184);</string>
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="dictionary">
+           <property name="text">
+            <string>Dictionary: None</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QWidget" name="displayContainer" native="true">
            <layout class="QGridLayout" name="gridLayout_3">
             <property name="leftMargin">
