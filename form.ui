@@ -99,6 +99,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="searchForGameWindow">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Upon clicking this button, PyLex will search for an instance of Bookworm Adventures volumes 1 or 2. Only usable when the game process has not already been located by PyLex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Search for the game window</string>
            </property>
@@ -106,6 +109,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="dictionary">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dictionary&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A list of words PyLex uses to look up possible words to submit. By clicking on this button, you can load custom dictionaries, however the default dictionaries bundled with PyLex are ripped from the game's files, and is therefore already optimal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
            <property name="text">
             <string>Dictionary: None</string>
            </property>
@@ -206,7 +212,7 @@ background-color:rgb(255, 184, 184);</string>
             </size>
            </property>
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots and reads the grid, then outputs it to the display box below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Screenshots and reads the grid, then outputs the best possible words below without automatically inputting them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
             <string>Get possible words</string>
