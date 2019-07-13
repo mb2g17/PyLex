@@ -1,3 +1,5 @@
+import win32api
+import win32gui
 from PIL import ImageEnhance, Image
 from PyQt5 import QtGui
 from time import sleep
@@ -53,19 +55,17 @@ class UiController:
         self.form.setupUi(window)
 
         # Creates the game handle
-        self.game = game.Game()
+        self.game = game.Game(lambda: self.update_logo_and_label(0))
 
         # If it finds the game
-        if self.game.hwnd is not None:
+        if self.game.hwnd.value_is_set():
             # If it's volume 1
             if self.game.version == 1:
-                self.form.isGameLocated.setText("Bookworm Adventures is located!")
-                self.form.logo.setPixmap(QtGui.QPixmap("resources/logo1.png"))
+                self.update_logo_and_label(1)
                 self.load_words(1)
             # If it's volume 2
             elif self.game.version == 2:
-                self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
-                self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
+                self.update_logo_and_label(2)
                 self.load_words(2)
             else:
                 self.load_words(1)
@@ -81,6 +81,24 @@ class UiController:
 
     def test(self):
         print("Test")
+
+    # Updates the logo and label based on state:
+    # 0 - process is not found
+    # 1 - Volume 1 is found
+    # 2 - Volume 2 is found
+    def update_logo_and_label(self, state):
+        if state == 0:
+            self.form.isGameLocated.setText("Bookworm Adventures is not located!")
+            self.form.logo.setPixmap(QtGui.QPixmap("resources/logof.png"))
+            self.form.isGameLocated.setStyleSheet("color:darkred;background-color:rgb(255, 184, 184);")
+        elif state == 1:
+            self.form.isGameLocated.setText("Bookworm Adventures is located!")
+            self.form.logo.setPixmap(QtGui.QPixmap("resources/logo1.png"))
+            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
+        elif state == 2:
+            self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
+            self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
+            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
 
     # Loads words, vol=1 for the first game, vol=2 for the second
     def load_words(self, vol):
@@ -180,6 +198,7 @@ class UiController:
 
     # When the screenshot grid button is pressed
     def screenshotgrid_clicked(self):
+
         # Screenshots grid
         self.screenshot_grid()
 

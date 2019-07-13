@@ -1,3 +1,4 @@
+from threading import Thread
 from time import sleep
 
 import pyautogui
@@ -13,6 +14,8 @@ from math import floor
 import cv2 as cv
 
 # Disables fail safe
+from locked_object import LockedObject
+
 pyautogui.FAILSAFE = False
 
 
@@ -54,17 +57,27 @@ class Game:
     # Game version (1 for the first game, 2 for vol. 2)
     version = 1
 
-    # Constructor
-    def __init__(self):
+    # Constructor, with process close event
+    def __init__(self, on_process_close):
         # Set handle to null (None) for now
-        self.hwnd = None
+        self.hwnd = LockedObject()
 
         # Tries to find the game
         def callback(hwnd, extra):
+
+            # Gets properties from hwnd
+            window_text = win32gui.GetWindowText(hwnd)
+            is_window_visible = win32gui.IsWindowVisible(hwnd)
+
+            self.hwnd.acquire_lock()
+            is_handle_none = self.hwnd.get() is None
+            self.hwnd.release_lock()
+
             # If the window name seems right AND this window is visible AND we haven't already found it
-            if "Bookworm Adventures" in win32gui.GetWindowText(hwnd) and \
-                    win32gui.IsWindowVisible(hwnd) == 1 and \
-                    self.hwnd is None:
+            if "Bookworm Adventures" in window_text and \
+                    is_window_visible == 1 and \
+                    is_handle_none:
+
                 # Gets process name
                 pid = win32process.GetWindowThreadProcessId(hwnd)
                 handle = win32api.OpenProcess(win32con.PROCESS_QUERY_INFORMATION | win32con.PROCESS_VM_READ, False,
@@ -74,8 +87,27 @@ class Game:
 
                 # If the process name seems legit
                 if "BookwormAdventures" in proc_name:
-                    # Store handle
-                    self.hwnd = hwnd
+                    # Store handle, thread-safely
+                    self.hwnd.acquire_lock()
+                    self.hwnd.set(hwnd)
+                    self.hwnd.release_lock()
+
+                    # Starts a thread that will check when window is closed
+                    def thread_process():
+                        while True:
+                            # Gets if window is still up, thread-safely
+                            self.hwnd.acquire_lock()
+                            is_window_condition = win32gui.IsWindow(self.hwnd.get())
+                            self.hwnd.release_lock()
+
+                            # If window is not up, say it is closed
+                            if is_window_condition == 0:
+                                on_process_close()
+                                break
+                            else:
+                                sleep(1)
+                    thread = Thread(target=thread_process)
+                    thread.start()
 
                     # If it's volume 2, remember that
                     if "Vol2" in proc_name:
@@ -87,8 +119,12 @@ class Game:
     # Gets position of Bookworm window
     def get_bookworm_pos(self):
 
-        # Gets position of this window
-        rect = win32gui.GetWindowRect(self.hwnd)
+        # Gets rectangle of window, thread-safely
+        self.hwnd.acquire_lock()
+        rect = win32gui.GetWindowRect(self.hwnd.get())
+        self.hwnd.release_lock()
+
+        # Gets coords and sizes
         x = rect[0]
         y = rect[1]
         w = rect[2] - x
