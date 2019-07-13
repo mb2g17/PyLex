@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>684</width>
-    <height>773</height>
+    <height>772</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,6 +94,13 @@ background-color:rgb(255, 184, 184);</string>
            </property>
            <property name="margin">
             <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="searchForGameWindow">
+           <property name="text">
+            <string>Search for the game window</string>
            </property>
           </widget>
          </item>
@@ -308,7 +315,7 @@ background-color:rgb(255, 184, 184);</string>
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string>ABCD</string>
+               <string/>
               </property>
               <property name="centerOnScroll">
                <bool>false</bool>
@@ -329,7 +336,7 @@ background-color:rgb(255, 184, 184);</string>
               <property name="font">
                <font>
                 <family>Cooper Std Black</family>
-                <pointsize>10</pointsize>
+                <pointsize>14</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -341,7 +348,7 @@ background-color:rgb(255, 184, 184);</string>
                <bool>true</bool>
               </property>
               <property name="plainText">
-               <string>misunderstanding</string>
+               <string/>
               </property>
               <property name="placeholderText">
                <string>misunderstanding</string>
@@ -386,6 +393,52 @@ background-color:rgb(255, 184, 184);</string>
            </property>
            <property name="value">
             <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="typingSpeedLabel">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Typing speed&lt;/span&gt;&lt;/p&gt;&lt;p&gt;How fast PyLex will type words, with 1 being the slowest and 10 being the fastest.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Typing speed:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="typingSpeedSpinBox">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>10</number>
+           </property>
+           <property name="value">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="submitImmediateLabel">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Submit immediately&lt;/span&gt;&lt;/p&gt;&lt;p&gt;When unticked, PyLex will give you some time to look at the word it has typed before it submits.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Submit immediately:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="submitImmediateBox">
+           <property name="text">
+            <string>PyLex will not submit immediately.</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="tristate">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -533,8 +586,8 @@ background-color:rgb(255, 184, 184);</string>
      <y>728</y>
     </hint>
     <hint type="destinationlabel">
-     <x>371</x>
-     <y>716</y>
+     <x>655</x>
+     <y>715</y>
     </hint>
    </hints>
   </connection>

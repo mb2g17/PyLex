@@ -1,3 +1,4 @@
+import pyautogui
 import win32api
 import win32gui
 from PIL import ImageEnhance, Image
@@ -55,32 +56,35 @@ class UiController:
         self.form.setupUi(window)
 
         # Creates the game handle
-        self.game = game.Game(lambda: self.update_logo_and_label(0))
+        self.game = game.Game()
 
-        # If it finds the game
-        if self.game.hwnd.value_is_set():
-            # If it's volume 1
-            if self.game.version == 1:
-                self.update_logo_and_label(1)
-                self.load_words(1)
-            # If it's volume 2
-            elif self.game.version == 2:
-                self.update_logo_and_label(2)
-                self.load_words(2)
-            else:
-                self.load_words(1)
-
-            # Make the text green
-            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
+        # Searches for the game window on start-up
+        self.searchforgamewindow_clicked()
 
         # Adds events
         self.form.inputWord.clicked.connect(self.inputword_clicked)
         self.form.screenshotGrid.clicked.connect(self.screenshotgrid_clicked)
         self.form.readGrid.clicked.connect(self.readgrid_clicked)
         self.form.getPossibleWords.clicked.connect(self.getpossiblewords_clicked)
+        self.form.searchForGameWindow.clicked.connect(self.searchforgamewindow_clicked)
+        self.form.typingSpeedSpinBox.valueChanged.connect(self.typingspeed_valuechanged)
+        self.form.submitImmediateBox.stateChanged.connect(self.submitimmediately_statechanged)
 
     def test(self):
         print("Test")
+
+    # Loads the default dictionaries
+    def load_default_dictionaries(self):
+        # If the game is actually there
+        if self.game.hwnd.value_is_set():
+            # If it's volume 1
+            if self.game.version == 1:
+                self.load_words(1)
+            # If it's volume 2
+            elif self.game.version == 2:
+                self.load_words(2)
+            else:
+                self.load_words(1)
 
     # Updates the logo and label based on state:
     # 0 - process is not found
@@ -195,6 +199,49 @@ class UiController:
     # ----------------
     # --* EVENTS
     # ----------------
+
+    # When the submit immediately box changes state
+    def submitimmediately_statechanged(self):
+        # Sets text depending on state
+        if self.form.submitImmediateBox.isChecked():
+            self.form.submitImmediateBox.setText("PyLex will submit immediately.")
+        else:
+            self.form.submitImmediateBox.setText("PyLex will not submit immediately.")
+
+    # When the typing speed changes
+    def typingspeed_valuechanged(self):
+        # Gets value from 1 to 10
+        value = int(self.form.typingSpeedSpinBox.value())
+
+        # Gets new pause constant
+        constant = -0.02211 * value + 0.2221
+
+        # Changes pyautogui pause duration to reflect speed
+        pyautogui.PAUSE = constant
+
+    # When the process is closed
+    def process_closed(self):
+        # Updates logo and stuff
+        self.update_logo_and_label(0)
+
+        # Enables the button
+        self.form.searchForGameWindow.setEnabled(True)
+
+        # Destroys original handle
+        self.game.hwnd.acquire_lock()
+        self.game.hwnd.set(None)
+        self.game.hwnd.release_lock()
+
+    # When the search for game window button is pressed
+    def searchforgamewindow_clicked(self):
+        # Searches for the game window
+        self.game.search_for_game_window(self.process_closed)
+
+        # If it's found, disable button, update logo and label and load dictionary
+        if self.game.hwnd.value_is_set():
+            self.form.searchForGameWindow.setEnabled(False)
+            self.update_logo_and_label(self.game.version)
+            self.load_default_dictionaries()
 
     # When the screenshot grid button is pressed
     def screenshotgrid_clicked(self):

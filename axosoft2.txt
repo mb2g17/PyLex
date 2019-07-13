@@ -3,8 +3,7 @@
 
 - make pylex play mini-games
 - make it type and submit faster
-- increase font of possible words box
 
-- change logo for bookworm adventures 1, 2, and game not found
+- add a setting that lets you control typing speed
 
-- add button to search for, and load, bookworm game process
+- make it so that controls don't work if the game is not found

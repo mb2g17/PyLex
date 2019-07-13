@@ -1,3 +1,4 @@
+import threading
 from threading import Thread
 from time import sleep
 
@@ -51,16 +52,20 @@ class Game:
         'z'
     ]
 
-    # Stores typing speed
-    type_speed = 0.05
-
     # Game version (1 for the first game, 2 for vol. 2)
     version = 1
 
     # Constructor, with process close event
-    def __init__(self, on_process_close):
+    def __init__(self):
         # Set handle to null (None) for now
         self.hwnd = LockedObject()
+
+    # Searches for the game window, takes in function event for when process closes
+    def search_for_game_window(self, on_process_close):
+
+        # If we've already found it, don't waste our time
+        if self.hwnd.value_is_set():
+            return
 
         # Tries to find the game
         def callback(hwnd, extra):
@@ -87,6 +92,7 @@ class Game:
 
                 # If the process name seems legit
                 if "BookwormAdventures" in proc_name:
+
                     # Store handle, thread-safely
                     self.hwnd.acquire_lock()
                     self.hwnd.set(hwnd)
@@ -260,10 +266,9 @@ class Game:
         # Gets app position
         (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
         pyautogui.click(appX + appWidth // 2,
-                        appY + appHeight // 2,
-                        duration=self.type_speed)
+                        appY + appHeight // 2)
 
-    # Types out a word on the grid given a list of positions (0,1), (2,3) etc.
+    # Types out a word on the grid given a list of positions (0,1), (2,3) etc. and a speed
     def type(self, positions):
         # Gets app position
         (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
@@ -272,8 +277,7 @@ class Game:
         for (x, y) in positions:
             # Click there
             pyautogui.click(appX + 304 + 25 + x * 50,
-                            appY + 335 + 25 + y * 50,
-                            duration=self.type_speed)
+                            appY + 335 + 25 + y * 50)
 
     # Just presses enter, usually to apply a word
     def press_enter(self):
