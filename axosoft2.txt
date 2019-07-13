@@ -7,3 +7,5 @@
 - add a setting that lets you control typing speed
 
 - make it so that controls don't work if the game is not found
+
+bug: pylex thinks vol2 is vol1 on 'search'

@@ -300,6 +300,9 @@ class UiController:
         for word in top_words:
             self.form.possibleWordsBox.insertPlainText(word + "\n")
 
+        # Gets if we should submit immediately (done before thread starts to preserve thread-safety)
+        immediate = self.form.submitImmediateBox.isChecked()
+
         # Thread function
         def thread_fun():
 
@@ -315,8 +318,11 @@ class UiController:
                 self.game.focus()
                 self.game.type(positions)
 
-                # Wait for the animations to play
-                sleep(1)
+                # Wait for the animations to play (if option is set)
+                if not immediate:
+                    sleep(1)
+                else:
+                    sleep(0.01)
 
                 # If the attack button is enabled, submit. If not, erase and start again
                 if self.game.is_attack_enabled():
