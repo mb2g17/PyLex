@@ -118,9 +118,11 @@ class Game:
                     thread = Thread(target=thread_process)
                     thread.start()
 
-                    # If it's volume 2, remember that
-                    if "Vol2" in proc_name:
+                    # Stores version
+                    if "Vol. 2" in window_text:
                         self.version = 2
+                    else:
+                        self.version = 1
 
         # Enumerate through windows
         win32gui.EnumWindows(callback, None)
