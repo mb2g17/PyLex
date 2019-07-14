@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>684</width>
-    <height>772</height>
+    <height>786</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -541,7 +541,7 @@ background-color:rgb(255, 184, 184);</string>
          <item>
           <widget class="QLabel" name="tesseractThresholdNumber">
            <property name="text">
-            <string>50</string>
+            <string>30</string>
            </property>
           </widget>
          </item>
@@ -557,7 +557,7 @@ background-color:rgb(255, 184, 184);</string>
             <number>255</number>
            </property>
            <property name="value">
-            <number>50</number>
+            <number>30</number>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>

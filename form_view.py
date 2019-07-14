@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(684, 772)
+        Form.resize(684, 786)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("resources/icon.fw.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
@@ -237,7 +237,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.tesseractThresholdSlider.sizePolicy().hasHeightForWidth())
         self.tesseractThresholdSlider.setSizePolicy(sizePolicy)
         self.tesseractThresholdSlider.setMaximum(255)
-        self.tesseractThresholdSlider.setProperty("value", 50)
+        self.tesseractThresholdSlider.setProperty("value", 30)
         self.tesseractThresholdSlider.setOrientation(QtCore.Qt.Horizontal)
         self.tesseractThresholdSlider.setObjectName("tesseractThresholdSlider")
         self.verticalLayout_5.addWidget(self.tesseractThresholdSlider)
@@ -301,6 +301,6 @@ class Ui_Form(object):
         self.radioSortByLength.setText(_translate("Form", "Length"))
         self.tesseractThresholdLabel.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-weight:600; text-decoration: underline;\">Thresholding value</span></p><p>How strongly PyLex should filter out black in screenshots, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.</p></body></html>"))
         self.tesseractThresholdLabel.setText(_translate("Form", "Thresholding value:"))
-        self.tesseractThresholdNumber.setText(_translate("Form", "50"))
+        self.tesseractThresholdNumber.setText(_translate("Form", "30"))
 
 
