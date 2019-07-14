@@ -109,6 +109,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="focusGame">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clicking this button will focus the game window, bringing it up from any other windows that are in-front of it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -187,6 +190,9 @@ background-color:rgb(255, 184, 184);</string>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QPushButton" name="inputWord">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -209,6 +215,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="getPossibleWords">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -231,6 +240,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="readGrid">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -253,6 +265,9 @@ background-color:rgb(255, 184, 184);</string>
          </item>
          <item>
           <widget class="QPushButton" name="screenshotGrid">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>

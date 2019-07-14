@@ -2,7 +2,7 @@ import pyautogui
 import win32api
 import win32gui
 from PIL import ImageEnhance, Image
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtWidgets
 from time import sleep
 
 from PyQt5.QtWidgets import QFileDialog
@@ -53,6 +53,12 @@ class UiController:
     # The possible words to type in (dictionary)
     dictionary: Dictionary = None
 
+    # Widgets that should be enabled when process is found
+    process_found_widgets: [QtWidgets.QWidget] = []
+
+    # Widgets that should be enabled when process is not found
+    process_not_found_widgets: [QtWidgets.QWidget] = []
+
     # Constructor; adds view to window
     def __init__(self, window):
 
@@ -80,6 +86,18 @@ class UiController:
         self.form.dictionary.clicked.connect(self.dictionary_clicked)
         self.form.tesseractThresholdSlider.valueChanged.connect(self.thresholdslider_valuechanged)
         self.form.focusGame.clicked.connect(self.focusgame_clicked)
+
+        # Fills in lists of widgets for enabling/disabling
+        self.process_found_widgets = [
+            self.form.focusGame,
+            self.form.inputWord,
+            self.form.screenshotGrid,
+            self.form.readGrid,
+            self.form.getPossibleWords
+        ]
+        self.process_not_found_widgets = [
+            self.form.searchForGameWindow
+        ]
 
     def test(self):
         print("Test")
@@ -261,13 +279,30 @@ class UiController:
         # Updates logo and stuff
         self.update_logo_and_label(0)
 
-        # Enables the button
-        self.form.searchForGameWindow.setEnabled(True)
+        # Enables and disables widgets
+        for w in self.process_found_widgets:
+            w.setEnabled(False)
+        for w in self.process_not_found_widgets:
+            w.setEnabled(True)
 
         # Destroys original handle
         self.game.hwnd.acquire_lock()
         self.game.hwnd.set(None)
         self.game.hwnd.release_lock()
+
+    # When the process is found
+    def process_found(self):
+        # Updates logo and stuff
+        self.update_logo_and_label(self.game.version)
+
+        # Enables and disables widgets
+        for w in self.process_found_widgets:
+            w.setEnabled(True)
+        for w in self.process_not_found_widgets:
+            w.setEnabled(False)
+
+        # Loads default dictionary
+        self.load_default_dictionaries()
 
     # When the search for game window button is pressed
     def searchforgamewindow_clicked(self):
@@ -276,17 +311,10 @@ class UiController:
 
         # If it's found, disable button, update logo and label and load dictionary
         if self.game.hwnd.value_is_set():
-            self.form.searchForGameWindow.setEnabled(False)
-            self.update_logo_and_label(self.game.version)
-            self.load_default_dictionaries()
+            self.process_found()
 
     # When the screenshot grid button is pressed
     def screenshotgrid_clicked(self):
-        # If process hasn't been found
-        if not self.game.hwnd.value_is_set():
-            self.process_not_found_alert()
-            return
-
         # Screenshots grid
         self.screenshot_grid()
 
@@ -296,11 +324,6 @@ class UiController:
 
     # When the read grid button is pressed
     def readgrid_clicked(self):
-        # If process hasn't been found
-        if not self.game.hwnd.value_is_set():
-            self.process_not_found_alert()
-            return
-
         # Screenshots grid and reads letters from grid
         grid = self.read_grid(self.screenshot_grid())
 
@@ -312,11 +335,6 @@ class UiController:
 
     # When the get possible words button is pressed
     def getpossiblewords_clicked(self):
-        # If process hasn't been found
-        if not self.game.hwnd.value_is_set():
-            self.process_not_found_alert()
-            return
-
         # Gets a list of possible words
         grid = self.read_grid(self.screenshot_grid())
         possible_words = self.get_possible_words(grid)
@@ -332,11 +350,6 @@ class UiController:
 
     # When the input word button is pressed
     def inputword_clicked(self):
-        # If process hasn't been found
-        if not self.game.hwnd.value_is_set():
-            self.process_not_found_alert()
-            return
-
         # Screenshots grid and reads letters from grid
         screenshot = self.screenshot_grid()
         grid = self.read_grid(screenshot)

@@ -1,9 +1,10 @@
-
+to do
+------
 - make pylex play mini-games
 
-- disable command buttons when game is not found
-- disable search button when game is found
-
-- add button that just focuses the game
-
 - remove google tesseract
+
+- add dark theme
+
+doing
+------
