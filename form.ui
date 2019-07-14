@@ -409,18 +409,18 @@ background-color:rgb(255, 184, 184);</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0" columnstretch="0,0">
       <item row="0" column="0">
-       <widget class="QGroupBox" name="ocrMethodBox">
+       <widget class="QGroupBox" name="themeBox">
         <property name="title">
          <string>OCR Method</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QRadioButton" name="radioPyautogui">
+          <widget class="QRadioButton" name="radioLight">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A reading approach using PyAutoGUI using sample images. More reliable than Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string>PyAutoGUI</string>
+            <string>Light theme</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -428,12 +428,12 @@ background-color:rgb(255, 184, 184);</string>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioTesseract">
+          <widget class="QRadioButton" name="radioDark">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's less reliable than PyAutoGUI, and a little experimental.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string>Google Tesseract</string>
+            <string>Dark theme</string>
            </property>
            <property name="checked">
             <bool>false</bool>
@@ -591,8 +591,8 @@ background-color:rgb(255, 184, 184);</string>
   <tabstop>screenshotGrid</tabstop>
   <tabstop>gridBox</tabstop>
   <tabstop>possibleWordsBox</tabstop>
-  <tabstop>radioPyautogui</tabstop>
-  <tabstop>radioTesseract</tabstop>
+  <tabstop>radioLight</tabstop>
+  <tabstop>radioDark</tabstop>
   <tabstop>wordsToTrySpinBox</tabstop>
   <tabstop>radioSortByScore</tabstop>
   <tabstop>radioSortByLength</tabstop>

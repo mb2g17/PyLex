@@ -2,9 +2,7 @@ to do
 ------
 - make pylex play mini-games
 
-- remove google tesseract
-
-- add dark theme
-
 doing
 ------
+- remove google tesseract
+- add dark theme

@@ -186,57 +186,8 @@ class Game:
         # Returns new image
         return Image.open("screenshot.png")
 
-    # Returns a grid of letters given a screenshot of the grid (using tesseract)
-    def get_letters_tesseract(self, screenshot):
-        # Stores a grid of spotted letters
-        letter_grid = [
-            [None, None, None, None],
-            [None, None, None, None],
-            [None, None, None, None],
-            [None, None, None, None]
-        ]
-
-        # Gets text
-        text = pytesseract.image_to_string(screenshot, lang="Cooper", )
-
-        # Remembers indexes and previous char
-        i = 0
-        j = 0
-        prev_i = 0
-        prev_j = 0
-        prev_char = ''
-
-        # Goes through each character
-        for char in text:
-            # If it's an actual letter
-            if char.isalpha():
-
-                # Convert to lower
-                char = char.lower()
-
-                # If this is u and prev char was q, do nothing
-                if not (char == 'u' and prev_char == 'q'):
-
-                    # Store in grid, if indexes are not too big
-                    if j < 4:
-                        letter_grid[i][j] = char
-
-                    # Stores previous char and indexes
-                    prev_char = char
-                    prev_i = i
-                    prev_j = j
-
-                    # Increase index
-                    i += 1
-                    if i == 4:
-                        i = 0
-                        j += 1
-
-        # Return grid
-        return letter_grid
-
     # Returns a grid of letters given a screenshot of the grid (using pyautogui)
-    def get_letters_pyautogui(self, screenshot):
+    def get_letters(self, screenshot):
 
         # Stores a grid of spotted letters
         letter_grid = [

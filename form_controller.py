@@ -66,6 +66,18 @@ class UiController:
         self.form = form_view.Ui_Form()
         self.form.setupUi(window)
 
+        # Fills in lists of widgets for enabling/disabling
+        self.process_found_widgets = [
+            self.form.focusGame,
+            self.form.inputWord,
+            self.form.screenshotGrid,
+            self.form.readGrid,
+            self.form.getPossibleWords
+        ]
+        self.process_not_found_widgets = [
+            self.form.searchForGameWindow
+        ]
+
         # Sets up dictionary
         self.dictionary = Dictionary(self.form.dictionary)
 
@@ -86,18 +98,6 @@ class UiController:
         self.form.dictionary.clicked.connect(self.dictionary_clicked)
         self.form.tesseractThresholdSlider.valueChanged.connect(self.thresholdslider_valuechanged)
         self.form.focusGame.clicked.connect(self.focusgame_clicked)
-
-        # Fills in lists of widgets for enabling/disabling
-        self.process_found_widgets = [
-            self.form.focusGame,
-            self.form.inputWord,
-            self.form.screenshotGrid,
-            self.form.readGrid,
-            self.form.getPossibleWords
-        ]
-        self.process_not_found_widgets = [
-            self.form.searchForGameWindow
-        ]
 
     def test(self):
         print("Test")
@@ -133,7 +133,7 @@ class UiController:
             self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
             self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
 
-    # Screenshots the grid using either tesseract or pyautogui, then returns the screenshot
+    # Screenshots the grid using pyautogui, then returns the screenshot
     def screenshot_grid(self):
         # Screenshots grid
         screenshot = self.game.screenshot_grid_filtered(int(self.form.tesseractThresholdSlider.value()))
@@ -143,10 +143,9 @@ class UiController:
         # Returns grid
         return screenshot
 
-    # Reads the grid using the screenshot with either tesseract or pyautogui
+    # Reads the grid using the screenshot with pyautogui
     def read_grid(self, screenshot):
-        return self.game.get_letters_tesseract(screenshot) if self.form.radioTesseract.isChecked() \
-            else self.game.get_letters_pyautogui(screenshot)
+        return self.game.get_letters(screenshot)
 
     # Displays a grid to the screen
     def display_grid(self, grid):
