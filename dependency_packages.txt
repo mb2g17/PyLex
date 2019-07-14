@@ -1,3 +1,5 @@
 PyQt5 (window)
 pyautogui (screenshotting and locating)
 pywin32 (native function calls)
+opencv-python (for thresholding)
+QDarkStyle (for dark theme)

@@ -11,6 +11,7 @@ import form_view
 import game
 import misc
 import numpy
+import qdarkstyle
 
 from threading import Thread
 
@@ -20,6 +21,9 @@ from dictionary import Dictionary
 
 # Controller class
 class UiController:
+    # Handle for the app
+    app: QtWidgets.QApplication = None
+
     # Tile scores
     tile_score = {
         "a": 1,
@@ -60,7 +64,9 @@ class UiController:
     process_not_found_widgets: [QtWidgets.QWidget] = []
 
     # Constructor; adds view to window
-    def __init__(self, window):
+    def __init__(self, app, window):
+        # Stores app
+        self.app = app
 
         # Creates the view
         self.form = form_view.Ui_Form()
@@ -98,6 +104,8 @@ class UiController:
         self.form.dictionary.clicked.connect(self.dictionary_clicked)
         self.form.tesseractThresholdSlider.valueChanged.connect(self.thresholdslider_valuechanged)
         self.form.focusGame.clicked.connect(self.focusgame_clicked)
+        self.form.radioLight.pressed.connect(lambda: self.set_theme(0))
+        self.form.radioDark.pressed.connect(lambda: self.set_theme(1))
 
     def test(self):
         print("Test")
@@ -123,15 +131,15 @@ class UiController:
         if state == 0:
             self.form.isGameLocated.setText("Bookworm Adventures is not located!")
             self.form.logo.setPixmap(QtGui.QPixmap("resources/logof.png"))
-            self.form.isGameLocated.setStyleSheet("color:darkred;background-color:rgb(255, 184, 184);")
+            self.form.isGameLocated.setStyleSheet("color:darkred;background-color:rgb(255, 184, 184);\npadding:0;")
         elif state == 1:
             self.form.isGameLocated.setText("Bookworm Adventures is located!")
             self.form.logo.setPixmap(QtGui.QPixmap("resources/logo1.png"))
-            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
+            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);\npadding:0;")
         elif state == 2:
             self.form.isGameLocated.setText("Bookworm Adventures Vol. 2 is located!")
             self.form.logo.setPixmap(QtGui.QPixmap("resources/logo2.png"))
-            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);")
+            self.form.isGameLocated.setStyleSheet("color:darkgreen;background-color:rgb(191, 255, 187);\npadding:0;")
 
     # Screenshots the grid using pyautogui, then returns the screenshot
     def screenshot_grid(self):
@@ -227,6 +235,18 @@ class UiController:
         for word in words:
             word = word.replace("q", "qu")
             self.form.possibleWordsBox.insertPlainText(word + "\n")
+
+    # Sets the theme
+    # 0 - light
+    # 1 - dark
+    def set_theme(self, theme):
+        # Light theme
+        if theme == 0:
+            self.app.setStyleSheet("")
+        # Dark theme
+        elif theme == 1:
+            self.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+            self.form.isGameLocated.setStyleSheet(self.form.isGameLocated.styleSheet() + "\npadding:0;")
 
     # ----------------
     # --* EVENTS

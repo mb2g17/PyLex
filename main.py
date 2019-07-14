@@ -10,7 +10,7 @@ app.setStyle("Fusion")
 window = QtWidgets.QWidget()
 
 # Sets up form for window
-form = form_controller.UiController(window)
+form = form_controller.UiController(app, window)
 
 # Shows window and executes app
 window.show()

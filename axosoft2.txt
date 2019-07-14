@@ -4,5 +4,4 @@ to do
 
 doing
 ------
-- remove google tesseract
 - add dark theme

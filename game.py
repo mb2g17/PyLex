@@ -4,7 +4,6 @@ from time import sleep
 
 import pyautogui
 import pyscreeze
-import pytesseract
 import win32api
 import win32con
 import win32gui
