@@ -79,6 +79,7 @@ class UiController:
         self.form.submitImmediateBox.stateChanged.connect(self.submitimmediately_statechanged)
         self.form.dictionary.clicked.connect(self.dictionary_clicked)
         self.form.tesseractThresholdSlider.valueChanged.connect(self.thresholdslider_valuechanged)
+        self.form.focusGame.clicked.connect(self.focusgame_clicked)
 
     def test(self):
         print("Test")
@@ -213,6 +214,10 @@ class UiController:
     # ----------------
     # --* EVENTS
     # ----------------
+
+    # When the user clicks on the focus game button
+    def focusgame_clicked(self):
+        self.game.focus()
 
     # When the threshold slider is slid
     def thresholdslider_valuechanged(self):

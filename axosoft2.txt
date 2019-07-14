@@ -6,6 +6,4 @@
 
 - add button that just focuses the game
 
-- change threshold value slider to a simple label and slider, not two labels one slider
-
 - remove google tesseract

@@ -108,6 +108,16 @@ background-color:rgb(255, 184, 184);</string>
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="focusGame">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clicking this button will focus the game window, bringing it up from any other windows that are in-front of it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Focus game</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="dictionary">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Dictionary&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A list of words PyLex uses to look up possible words to submit. By clicking on this button, you can load custom dictionaries, however the default dictionaries bundled with PyLex are ripped from the game's files, and is therefore already optimal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
