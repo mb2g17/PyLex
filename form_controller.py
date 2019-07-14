@@ -78,6 +78,7 @@ class UiController:
         self.form.typingSpeedSpinBox.valueChanged.connect(self.typingspeed_valuechanged)
         self.form.submitImmediateBox.stateChanged.connect(self.submitimmediately_statechanged)
         self.form.dictionary.clicked.connect(self.dictionary_clicked)
+        self.form.tesseractThresholdSlider.valueChanged.connect(self.thresholdslider_valuechanged)
 
     def test(self):
         print("Test")
@@ -212,6 +213,12 @@ class UiController:
     # ----------------
     # --* EVENTS
     # ----------------
+
+    # When the threshold slider is slid
+    def thresholdslider_valuechanged(self):
+        self.form.tesseractThresholdLabel.setText("Thresholding value (" +
+                                                  str(self.form.tesseractThresholdSlider.value()) +
+                                                  "):")
 
     # When the dictionary button is clicked
     def dictionary_clicked(self):

@@ -265,7 +265,6 @@ class Game:
 
     # Focuses the game
     def focus(self):
-        print("FOCUS")
         self.hwnd.acquire_lock()
         win32gui.BringWindowToTop(self.hwnd.get())
         self.hwnd.release_lock()

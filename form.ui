@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>684</width>
+    <width>660</width>
     <height>786</height>
    </rect>
   </property>
@@ -382,8 +382,75 @@ background-color:rgb(255, 184, 184);</string>
      <property name="title">
       <string>Options</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="1">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0" columnstretch="0,0">
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="ocrMethodBox">
+        <property name="title">
+         <string>OCR Method</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QRadioButton" name="radioPyautogui">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A reading approach using PyAutoGUI using sample images. More reliable than Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>PyAutoGUI</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioTesseract">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's less reliable than PyAutoGUI, and a little experimental.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Google Tesseract</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="sortWordsByBox">
+        <property name="title">
+         <string>Sort words by</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QRadioButton" name="radioSortByScore">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Sort words by score&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sorts words by their score in Bookworm Adventures.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Score</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radioSortByLength">
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Sort words by length&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sorts words by how long they are. If words are the same length, they are sorted alphabetically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="text">
+            <string>Length</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1" rowspan="2">
        <widget class="QWidget" name="wordsToTryBox" native="true">
         <layout class="QFormLayout" name="formLayout">
          <property name="formAlignment">
@@ -455,97 +522,17 @@ background-color:rgb(255, 184, 184);</string>
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QGroupBox" name="ocrMethodBox">
-        <property name="title">
-         <string>OCR Method</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QRadioButton" name="radioPyautogui">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;PyAutoGUI&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A reading approach using PyAutoGUI using sample images. More reliable than Google Tesseract.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>PyAutoGUI</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioTesseract">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Google Tesseract&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A type of OCR technology provided by Google. It's less reliable than PyAutoGUI, and a little experimental.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Google Tesseract</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QGroupBox" name="sortWordsByBox">
-        <property name="title">
-         <string>Sort words by</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QRadioButton" name="radioSortByScore">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Sort words by score&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sorts words by their score in Bookworm Adventures.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Score</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioSortByLength">
-           <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Sort words by length&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sorts words by how long they are. If words are the same length, they are sorted alphabetically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="text">
-            <string>Length</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QWidget" name="thresholdValueBox" native="true">
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
+         <item row="3" column="0">
           <widget class="QLabel" name="tesseractThresholdLabel">
            <property name="toolTip">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Thresholding value&lt;/span&gt;&lt;/p&gt;&lt;p&gt;How strongly PyLex should filter out black in screenshots, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string>Thresholding value:</string>
+            <string>Thresholding value (30):</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLabel" name="tesseractThresholdNumber">
-           <property name="text">
-            <string>30</string>
-           </property>
-          </widget>
-         </item>
-         <item>
+         <item row="3" column="1">
           <widget class="QSlider" name="tesseractThresholdSlider">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -573,7 +560,6 @@ background-color:rgb(255, 184, 184);</string>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>tesseractThresholdSlider</tabstop>
   <tabstop>inputWord</tabstop>
   <tabstop>getPossibleWords</tabstop>
   <tabstop>readGrid</tabstop>
@@ -587,22 +573,5 @@ background-color:rgb(255, 184, 184);</string>
   <tabstop>radioSortByLength</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>tesseractThresholdSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>tesseractThresholdNumber</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>447</x>
-     <y>728</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>655</x>
-     <y>715</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
