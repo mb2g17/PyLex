@@ -202,6 +202,13 @@ class UiController:
                         "pressing the 'Search for game window' button.",
                         "Game not found!")
 
+    # Fills the word box with words
+    def fill_word_box(self, words):
+        self.form.possibleWordsBox.setPlainText("")
+        for word in words:
+            word = word.replace("q", "qu")
+            self.form.possibleWordsBox.insertPlainText(word + "\n")
+
     # ----------------
     # --* EVENTS
     # ----------------
@@ -309,9 +316,7 @@ class UiController:
         top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
 
         # Puts them in box
-        self.form.possibleWordsBox.setPlainText("")
-        for word in top_words:
-            self.form.possibleWordsBox.insertPlainText(word + "\n")
+        self.fill_word_box(top_words)
 
     # When the input word button is pressed
     def inputword_clicked(self):
@@ -333,9 +338,7 @@ class UiController:
 
         # Gets top words and puts them in box
         top_words = possible_words[:self.form.wordsToTrySpinBox.value()]
-        self.form.possibleWordsBox.setPlainText("")
-        for word in top_words:
-            self.form.possibleWordsBox.insertPlainText(word + "\n")
+        self.fill_word_box(top_words)
 
         # Gets if we should submit immediately (done before thread starts to preserve thread-safety)
         immediate = self.form.submitImmediateBox.isChecked()

@@ -1,9 +1,12 @@
 
 - make pylex play mini-games
 
-- add more tooltips
-
 - disable command buttons when game is not found
 - disable search button when game is found
 
 - make game process be on top when commands are used
+
+- in the words display, add a 'u' to the 'q's in words
+
+- set default threshold to 30
+- change threshold value slider to a simple label and slider, not two labels one slider
