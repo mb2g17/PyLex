@@ -263,12 +263,12 @@ class Game:
 
         return letter_grid
 
-    # Focuses the game by clicking on it
+    # Focuses the game
     def focus(self):
-        # Gets app position
-        (appX, appY, appWidth, appHeight) = self.get_bookworm_pos()
-        pyautogui.click(appX + appWidth // 2,
-                        appY + appHeight // 2)
+        print("FOCUS")
+        self.hwnd.acquire_lock()
+        win32gui.BringWindowToTop(self.hwnd.get())
+        self.hwnd.release_lock()
 
     # Types out a word on the grid given a list of positions (0,1), (2,3) etc. and a speed
     def type(self, positions):
