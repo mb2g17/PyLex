@@ -282,7 +282,7 @@ class Ui_Form(object):
         self.possibleWordsBox.setToolTip(_translate("Form", "<html><head/><body><p>A display for the list of possible words.</p></body></html>"))
         self.possibleWordsBox.setPlaceholderText(_translate("Form", "misunderstanding"))
         self.optionsBox.setTitle(_translate("Form", "Options"))
-        self.themeBox.setTitle(_translate("Form", "OCR Method"))
+        self.themeBox.setTitle(_translate("Form", "Themes"))
         self.radioLight.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-weight:600; text-decoration: underline;\">PyAutoGUI</span></p><p>A reading approach using PyAutoGUI using sample images. More reliable than Google Tesseract.</p></body></html>"))
         self.radioLight.setText(_translate("Form", "Light theme"))
         self.radioDark.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-weight:600; text-decoration: underline;\">Google Tesseract</span></p><p>A type of OCR technology provided by Google. It\'s less reliable than PyAutoGUI, and a little experimental.</p></body></html>"))
