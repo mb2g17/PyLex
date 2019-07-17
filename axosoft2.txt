@@ -1,7 +1,8 @@
 to do
 ------
 - make pylex play mini-games
+- change default threshold value to 50 again
+- change theme box title from "OCR Method" to "Themes"
 
 doing
 ------
-- add dark theme

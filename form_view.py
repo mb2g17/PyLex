@@ -237,7 +237,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.tesseractThresholdSlider.sizePolicy().hasHeightForWidth())
         self.tesseractThresholdSlider.setSizePolicy(sizePolicy)
         self.tesseractThresholdSlider.setMaximum(255)
-        self.tesseractThresholdSlider.setProperty("value", 30)
+        self.tesseractThresholdSlider.setProperty("value", 50)
         self.tesseractThresholdSlider.setOrientation(QtCore.Qt.Horizontal)
         self.tesseractThresholdSlider.setObjectName("tesseractThresholdSlider")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.tesseractThresholdSlider)
@@ -300,6 +300,6 @@ class Ui_Form(object):
         self.submitImmediateLabel.setText(_translate("Form", "Submit immediately:"))
         self.submitImmediateBox.setText(_translate("Form", "PyLex will not submit immediately."))
         self.tesseractThresholdLabel.setToolTip(_translate("Form", "<html><head/><body><p><span style=\" font-weight:600; text-decoration: underline;\">Thresholding value</span></p><p>How strongly PyLex should filter out black in screenshots, with 0 (far left) filtering out the most and 255 (far right) filtering out the least.</p></body></html>"))
-        self.tesseractThresholdLabel.setText(_translate("Form", "Thresholding value (30):"))
+        self.tesseractThresholdLabel.setText(_translate("Form", "Thresholding value (50):"))
 
 
