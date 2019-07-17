@@ -1,4 +1,4 @@
-PyQt5 (window)
+PyQt5 5.12.2 (window, must have this version to make pyinstaller work)
 pyautogui (screenshotting and locating)
 pywin32 (native function calls)
 opencv-python (for thresholding)
