@@ -90,7 +90,7 @@ class Game:
                 proc_name = proc_name.split("\\")[::-1][0]
 
                 # If the process name seems legit
-                if "BookwormAdventures" in proc_name:
+                if "BookwormAdventures" in proc_name or "popcapgame1" in proc_name:
 
                     # Store handle, thread-safely
                     self.hwnd.acquire_lock()
