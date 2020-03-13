@@ -1,12 +1,16 @@
+altgraph==0.17
+future==0.18.2
 helpdev==0.6.10
 importlib-metadata==1.5.0
 MouseInfo==0.1.2
 numpy==1.18.1
 opencv-python==4.2.0.32
+pefile==2019.4.18
 Pillow==7.0.0
 psutil==5.7.0
 PyAutoGUI==0.9.48
 PyGetWindow==0.0.8
+PyInstaller==4.0.dev0+96897fc78d
 PyMsgBox==1.0.7
 pyperclip==1.7.0
 PyQt5==5.12.2
@@ -15,6 +19,7 @@ PyRect==0.1.4
 PyScreeze==0.1.26
 PyTweening==1.0.3
 pywin32==227
+pywin32-ctypes==0.2.0
 QDarkStyle==2.8
 QtPy==1.9.0
 zipp==3.1.0
