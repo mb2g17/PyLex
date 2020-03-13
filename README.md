@@ -15,6 +15,36 @@ This uses libraries such as [PyAutoGUI](https://pypi.org/project/PyAutoGUI/) for
 
 https://github.com/Taking1n1/PyLex/releases
 
+# Setting up the project
+## Prerequisites
+To set up the project you will need:
+ - Python 3.7
+ - Pip
+ - Virtualenv
+
+## Setup
+
+ 1. Pull the repo and go into the repo
+`git clone https://github.com/mb2g17/PyLex.git`
+`cd PyLex`
+ 2. Create and activate a virtual environment
+`virtualenv env`
+`env\Scripts\activate`
+ 3. Install the requirements
+`pip install -r requirements.txt`
+
+## Running the project
+To run PyLex, run the command:
+`python main.py`
+Make sure you've set up the project beforehand.
+## Creating a distribution
+To bundle the project in an executable, run:
+`pyinstaller --onefile --windowed --icon=icon.ico --name=PyLex main.py`
+If you get the error "Failed to execute script pyi_rth_pkgres", then run:
+`pip uninstall pyinstaller`
+`pip install https://github.com/pyinstaller/pyinstaller/archive/develop.zip`
+... and try again.
+
 # Developed with
 
 Python 3.7.3
