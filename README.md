@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/Taking1n1/PyLex/master/resources/logo.png)
+![logo](https://git.matt-barnes.co.uk/mb2g17/PyLex/raw/branch/master/resources/logo.png)
 
 [![Available on GitHub](https://img.shields.io/badge/Available%20on-GitHub-white?style=flat-square&logo=github)](https://github.com/mb2g17/PyLex)
 
@@ -15,7 +15,7 @@ This uses libraries such as [PyAutoGUI](https://pypi.org/project/PyAutoGUI/) for
 
 # Releases
 
-https://github.com/Taking1n1/PyLex/releases
+https://git.matt-barnes.co.uk/mb2g17/PyLex/releases
 
 # Setting up the project
 ## Prerequisites
@@ -27,7 +27,7 @@ To set up the project you will need:
 ## Setup
 
  1. Pull the repo and go into the repo
-`git clone https://github.com/mb2g17/PyLex.git`
+`git clone https://git.matt-barnes.co.uk/mb2g17/PyLex.git`
 `cd PyLex`
  2. Create and activate a virtual environment
 `virtualenv env`
@@ -55,11 +55,11 @@ Windows 10 Education x64
 
 # Images
 
-![Screenshot1](https://raw.githubusercontent.com/Taking1n1/PyLex/master/Screenshot_1.png)
+![Screenshot1](https://git.matt-barnes.co.uk/mb2g17/PyLex/raw/branch/master/Screenshot_1.png)
 
-![Screenshot2](https://raw.githubusercontent.com/Taking1n1/PyLex/master/Screenshot_2.png)
+![Screenshot2](https://git.matt-barnes.co.uk/mb2g17/PyLex/raw/branch/master/Screenshot_2.png)
 
-![Screenshot3](https://raw.githubusercontent.com/Taking1n1/PyLex/master/Screenshot_3.png)
+![Screenshot3](https://git.matt-barnes.co.uk/mb2g17/PyLex/raw/branch/master/Screenshot_3.png)
 
 # Videos
 
