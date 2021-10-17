@@ -1,6 +1,7 @@
 ![logo](https://git.matt-barnes.co.uk/mb2g17/PyLex/raw/branch/master/resources/logo.png)
 
 [![Available on GitHub](https://img.shields.io/badge/Available%20on-GitHub-white?style=flat-square&logo=github)](https://github.com/mb2g17/PyLex)
+[![License: GPL v3](https://img.shields.io/badge/Licenced%20under-GPLv3-blue?logo=gnu)](https://www.gnu.org/licenses/gpl-3.0)
 
 # What is this?
 A python-based application that plays Bookworm Adventures.
